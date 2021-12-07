@@ -1,7 +1,6 @@
 /.venv
 .idea
 .venv
-/publish-api
 .env
 db.sqlite3
 __pycache__

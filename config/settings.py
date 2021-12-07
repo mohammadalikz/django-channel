@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'echo',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -67,7 +69,10 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+#WSGI_APPLICATION = 'config.wsgi.application'
+
+#channels
+ASGI_APPLICATION = 'config.routing.application'
 
 
 # Database

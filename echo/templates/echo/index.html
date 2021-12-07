@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Echo Text</title>
+</head>
+<body>
+    <textarea id="echo-log" cols="30" rows="10"></textarea><br/>
+    <input type="text" id="text-input" size="100"/><br/>
+    <input type="button" id="text-submit" value="Enter"/>
+    <script>
+        var socket = new WebSocket(
+            'ws://' + window.location.host +
+            '/ws/');
+        socket.onmessage = function(e) {
+            var message = e.data;
+            document.querySelector('#echo-log').value += (message + '\n');
+        };
+        socket.onclose = function(e) {
+            console.error('socket closed unexpectedly');
+        };
+        document.querySelector('#text-input').focus();
+        document.querySelector('#text-input').onkeyup = function(e){
+            if (e.keyCode === 13){
+                document.querySelector('#text-submit').click();
+            }
+        };
+        document.querySelector('#text-submit').onclick = function(e) {
+            var messageInputDom = document.querySelector('#text-input');
+            var message = messageInputDom.value;
+            socket.send(message);
+            messageInputDom.value = '';
+
+        };
+
+    </script>
+</body>
+</html>
